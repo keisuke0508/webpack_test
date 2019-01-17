@@ -1,10 +1,13 @@
+const date = (+new Date)
+const fs = require("fs");
+
 module.exports = {
 	watch: true,
 	mode: 'production',
 	entry: "./assets/app.js",
 	output: {
 		path: `${__dirname}/static/js`,
-		filename: "app.min.js"
+		filename: "app." + date + ".js"
 	},
 	module: {
 		rules: [
@@ -31,3 +34,7 @@ module.exports = {
 		hot: true
 	},
 }
+
+var static_file = JSON.parse(fs.readFileSync(`${__dirname}/static_file_version.json`))
+static_file.version = date;
+fs.writeFileSync(`${__dirname}/static_file_version.json`, JSON.stringify(static_file, null, ''))
