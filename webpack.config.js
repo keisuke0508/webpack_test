@@ -45,12 +45,3 @@ for(filenum = 0; filenum < filenames.length; filenum++) {
 }
 static_file.version = version;
 fs.writeFileSync(`${__dirname}/static_file_version.json`, JSON.stringify(static_file, null, ''));
-
-let old_version = static_file.version;
-static_file.version = version;
-fs.writeFileSync(`${__dirname}/static_file_version.json`, JSON.stringify(static_file, null, ''));
-try {
-	fs.unlink(`${__dirname}/static/js/app.${old_version}.js`, function(){});
-}catch(err) {
-	console.log(err);
-}
