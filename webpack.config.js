@@ -36,6 +36,7 @@ module.exports = {
 	},
 }
 
+// json
 let static_file = JSON.parse(fs.readFileSync(`${__dirname}/static_file_version.json`));
 let filenames = fs.readdirSync(`${__dirname}/static/js/`);
 for(filenum = 0; filenum < filenames.length; filenum++) {
@@ -45,3 +46,6 @@ for(filenum = 0; filenum < filenames.length; filenum++) {
 }
 static_file.version = version;
 fs.writeFileSync(`${__dirname}/static_file_version.json`, JSON.stringify(static_file, null, ''));
+
+// python
+fs.writeFileSync(`${__dirname}/static_file_version.py`, "VERSION = " + version);
